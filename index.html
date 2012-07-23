@@ -1,0 +1,439 @@
+<!doctype html>
+<html>
+<head>
+    <title>Gradle - Your Groovy Build Wingman</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
+    <link rel="stylesheet" href="css/presentation.css">
+
+    <link rel="stylesheet" href="lib/zenburn.css">
+</head>
+<body>
+<div id="reveal">
+    <img class="gradle-badge" src="assets/images/gradle.svg"/>
+
+    <div class="state-background"></div>
+
+    <div class="slides">
+        <section>
+            <h1>Gradle</h1>
+
+            <h2>Your Groovy build wingman</h2>
+
+            <h3>Noam Tenne</h3>
+        </section>
+        <section>
+            <h2>$ whoami</h2>
+            <ul>
+                <li>Developing on the JVM for ~10 years.</li>
+                <li>With JFrog from day 1 - prominent in majority of projects.</li>
+                <li>All-around curious person.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Agenda</h2>
+            <ol>
+                <li>Meet Gradle</li>
+                <li>The glorious 1.0</li>
+                <li>A Groovy glazing</li>
+                <li>Enhance!</li>
+            </ol>
+            <p>
+                <br>
+                Let's roll...
+            </p>
+        </section>
+        <section>
+            <h3>Poll</h3>
+            <pre>
+                <code style="font-size: 50px; margin-top: 20px;">$ ll /opt/tools/build</code>
+            </pre>
+        </section>
+        <section>
+            <section>
+                <h3>Face It!</h3>
+                <img src="assets/images/zoidberg.jpg"/>
+
+                <p>
+                    <br>
+                    Yeah, I said it!
+                </p>
+            </section>
+            <section>
+                <h3>Issues With Ant & Ivy</h3>
+                <div>
+                <ul>
+                    <li>Commonly "write-only"</li>
+                    <li>Verbose</li>
+                    <li>Ivy is in maintenance mode</li>
+                </ul>
+                </div>
+
+                <div style="padding-top: 70px">
+                    Standard reaction to enterprise-scale builds:
+                    <img src="assets/images/oh-god-why.png" style="height: 250px"/>
+                </div>
+            </section>
+            <section>
+                <h3>Issues With Maven</h3>
+                <ul>
+                    <li>Opinionated</li>
+                    <li>Inflexible</li>
+                    <li>Carries architectural baggage</li>
+                </ul>
+                <div style="padding-top: 70px">
+                    Standard reaction to enterprise-scale builds:
+                <img src="assets/images/must-resist.png" style="height: 250px"/>
+                </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Meet Gradle</h2>
+
+                <ul>
+                    <li>Scalable build automation</li>
+                    <li>Dependency management</li>
+                    <li>Portable</li>
+                    <li>DAG over life-cycles/ordering</li>
+                    <li>Convention over configuration</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Developer Friendly</h3>
+
+                <ul>
+                    <li>FOSS - ASL</li>
+                    <li>Super configurable and extensible</li>
+                    <li>Groovy-based DSL over XML</li>
+                    <li>Beyond Java and Groovy</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Don't Leave Your Old Infra Behind</h3>
+
+                <ul>
+                    <li>Resolve and generate Maven and Ivy artifacts</li>
+                    <li>Execute Ant tasks</li>
+                    <li>Use Maven plugins</li>
+                    <li>Easily import Maven and Ant</li>
+                </ul>
+
+                <img src="assets/images/eyes.jpg"/>
+            </section>
+            <section>
+                <h3>No Client Side Configuration</h3>
+
+                <ul>
+                    <li>JVM configurations and arguments</li>
+                    <li>Gradle Wrapper</li>
+                    <li>Init scripts</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Concise</h3>
+
+                given:
+                <pre>
+                    <code style="font-size: 40px; margin-top: 20px;">
+src/main/java
+                        <br>
+src/main/resources
+                    </code>
+                </pre>
+                build.gradle:
+                <pre>
+                    <code class="groovy" style="font-size: 40px; margin-top: 20px;">
+apply plugin: 'java'
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>GAV?</h3>
+
+                build.gradle:
+                <pre>
+                    <code class="groovy" style="line-height: 45px; font-size: 40px; margin-top: 10px;">
+apply plugin: 'java'
+group = "org._10ne.project"
+version = "0.0.1-SNAPSHOT"
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Dependencies?</h3>
+
+                build.gradle:
+                <pre>
+                    <code class="groovy" style="line-height: 40px; font-size: 30px; margin-top: 10px;">
+apply plugin: 'java'
+
+group = "org._10ne.project"
+version = "0.0.1-SNAPSHOT"
+
+dependencies {
+    compile group: 'org', name: 'module',
+            version: 'version'
+}
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>The Glorious 1.0</h2>
+
+                <img style="height: 350px" src="assets/images/1.0.jpg"/>
+                <div style="padding-top: 20px">
+                    <h3>Now it's stable</h3>
+                </div>
+            </section>
+            <section>
+                <h3>Improved IDE Support</h3>
+
+                <ul>
+                    <li>"idea" and "eclipse" plugins</li>
+                    <li>Intellij IDEA - Native</li>
+                    <li>NetBeans - Native</li>
+                    <li>Eclipse - Plugin</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Better Dependency Management</h3>
+
+                <ul>
+                    <li>Away from Ivy - complete re-write</li>
+                    <li>Version conflict resolution - soon fully customizable</li>
+                    <li>Traceable resolution</li>
+                </ul>
+            </section>
+            <section>
+                <h3>New Plugins</h3>
+
+                <ul>
+                    <li>C++</li>
+                    <li>Code quality</li>
+                    <li>Artifact signing</li>
+                    <li>Resuming builds</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Optimizations</h3>
+
+                <ul>
+                    <li>Daemon - now production ready</li>
+                    <li>Dependency resolution and caching</li>
+                    <li>Compilation</li>
+                </ul>
+
+                <img src="assets/images/optimize.jpg"/>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>A Groovy Glazing</h2>
+                <img src="assets/images/cake.jpg"/>
+                <h3>Groovy can go anywhere in your build</h3>
+            </section>
+            <section>
+                Apply configuration to all sub-projects:
+                <pre>
+                    <code class="groovy" style="line-height: 40px; font-size: 30px; margin-top: 10px;">
+subprojects {
+    //apply plugin
+    //apply dependency manipulate tasks
+    ...
+}
+                    </code>
+                </pre>
+
+                Pretty standard...
+            </section>
+            <section>
+                Apply to select sub-projects:
+                <pre>
+                    <code class="groovy" style="line-height: 40px; font-size: 30px; margin-top: 10px;">
+def selectedProjects =
+    subprojects.findAll {
+        p -> //condition
+    }
+
+configure(selectedProjects) {
+    //apply plugin
+    //apply dependency manipulate tasks
+    ...
+}
+                    </code>
+                </pre>
+            </section>
+            <section>
+                Create a brand new task:
+                <pre>
+                    <code class="groovy" style="line-height: 40px; font-size: 30px; margin-top: 10px;">
+task taskName << {
+    //Do task stuff
+}
+                    </code>
+                </pre>
+            </section>
+            <section>
+                Act on the state of a task result:
+                <pre>
+                    <code class="groovy" style="line-height: 40px; font-size: 30px; margin-top: 10px;">
+gradle.taskGraph.afterTask {
+  task, taskState ->
+
+  def interestingTask =
+      (task.name =~ /\d{5}\-\d{5}/)
+        .matchesPartially()
+
+  if (interestingTask) {
+    //Do something with task
+  }
+}
+                    </code>
+                </pre>
+        </section>
+        </section>
+        <section>
+            <section>
+                <h2>Enhance!</h2>
+                Let's write a plugin!
+            </section>
+            <section>
+                <h3>Why?</h3>
+
+                <ul>
+                    <li>Gradle is still growing</li>
+                    <li>One size never fits all</li>
+                    <li>Re-use and share custom logic</li>
+                </ul>
+            </section>
+            <section>
+                <h3>How?</h3>
+                <div>
+                    Can be written in any language - as long as the final state is byte-code.
+                </div>
+
+                <div style="padding-top: 60px">
+                    <div>Distribution:</div>
+                    <div style="padding-top: 15px">
+                        <ul>
+                            <li>JAR file</li>
+                            <li>Within project sources</li>
+                            <li>Within build scripts</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h3>What?</h3>
+
+                <div style="padding-top: 40px">
+                    <div>A tip of the iceberg:</div>
+                    <div style="padding-top: 15px">
+                        <ul>
+                            <li>Various hooks</li>
+                            <li>Intervene with existing tasks</li>
+                            <li>Create new tasks</li>
+                            <li>Customize configurations</li>
+                        </ul>
+                    </div>
+                    <div style="padding-top: 20px">Extension points don't do justice to the extensibility</div>
+                </div>
+            </section>
+            <section>
+                <h3>Let's see some code</h3>
+            </section>
+        </section>
+        <section>
+            <h2>Links</h2>
+            <ul>
+                <li>
+                    <p>Gradle plugins:</p>
+                    <p>http://wiki.gradle.org/display/GRADLE/Plugins</p>
+                </li>
+                <li>
+                    <p>Plugins developer guide:</p>
+                    <p>http://www.gradle.org/docs/current/userguide/custom_plugins.html</p>
+                </li>
+                <li>
+                    <p>This presentation:</p>
+                    <p>https://github.com/noamt/gradle-presentation-july-2012</p>
+                </li>
+                <li>
+                    <p>Sample project:</p>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h2>The end!</h2>
+            <h3>Discuss</h3>
+        </section>
+    </div>
+
+    <aside class="controls">
+        <a class="left" href="#">&#x25C4;</a>
+        <a class="right" href="#">&#x25BA;</a>
+        <a class="up" href="#">&#x25B2;</a>
+        <a class="down" href="#">&#x25BC;</a>
+    </aside>
+
+    <div class="progress"><span></span></div>
+</div>
+<script src="lib/highlight.js"></script>
+<script src="lib/classList.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // Parse the query string into a key/value object
+    var query = {};
+    location.search.replace(/[A-Z0-9]+?=(\w*)/gi, function (a) {
+        query[ a.split('=').shift() ] = a.split('=').pop();
+    });
+    //
+    //    // Fires when a slide with data-state=customevent is activated
+    //    Reveal.addEventListener('customevent', function () {
+    //        alert('"customevent" has fired');
+    //    });
+    //
+    //    // Fires each time a new slide is activated
+    Reveal.addEventListener('slidechanged', function (event) {
+        // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+    });
+
+    Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls:true,
+
+        // Display a presentation progress bar
+        progress:true,
+
+        // If true; each slide will be pushed to the browser history
+        history:true,
+
+        // Loops the presentation, defaults to false
+        loop:false,
+
+        // Flags if mouse wheel navigation should be enabled
+        mouseWheel:true,
+
+        // Apply a 3D roll to links on hover
+        rollingLinks:true,
+
+        // UI style
+        theme:'default', // default/neon
+
+        // Transition style
+        transition:'default' // default/cube/page/concave/linear(2d)
+    });
+
+    hljs.initHighlightingOnLoad();
+</script>
+</body>
+</html>
